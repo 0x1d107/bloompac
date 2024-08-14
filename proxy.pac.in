@@ -1,0 +1,26 @@
+const bloom = [
+#include "bloom.json"
+][0];
+#include "bloom.js"
+function FindProxyForURL(url,host){
+alert("Proxy for url:"+url);
+const proxydata = "127.0.0.1:1080";
+const PROXY = "SOCKS5 "+proxydata+"; DIRECT"; 
+var tld = host.split('.').slice(-1)[0]
+var hostpriv = host.split('.').slice(-2).join('.')
+var hostpriv3 = host.split('.').slice(-3).join('.')
+if(['ru','рф'].indexOf(tld)!=-1){
+	alert("Rule *.ru: DIRECT");
+	return "DIRECT";
+}
+if(['ua'].indexOf(tld)!=-1){
+	alert("Rule *.ua: PROXY");
+	return PROXY;
+}
+if(checkbloom(bloom,host)||checkbloom(bloom,hostpriv)||checkbloom(bloom,hostpriv3)||!isResolvable(host)){
+	alert("Bloom check positive")
+	return PROXY;
+}
+alert("Bloom check negative");
+return "DIRECT";
+}

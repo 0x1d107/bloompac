@@ -1,0 +1,6 @@
+const bloom = [
+#include "bloom.json"
+][0];
+#include "bloom.js"
+console.log(checkbloom(bloom,"google.com"))
+console.log(checkbloom(bloom,"rutracker.org"))
