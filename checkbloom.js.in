@@ -2,5 +2,21 @@ const bloom = [
 #include "bloom.json"
 ][0];
 #include "bloom.js"
+const ctset = [
+#include "ctset.json"
+][0];
 console.log(checkbloom(bloom,"google.com"))
-console.log(checkbloom(bloom,"rutracker.org"))
+console.time('checkbloom')
+for(var i=0;i<10;i++){
+	console.log(checkbloom(bloom,"google.com"))
+	console.log(checkbloom(bloom,"rutracker.org"))
+}
+console.timeEnd('checkbloom')
+console.log(ctset["google.com"])
+console.time('checkset')
+for(var i=0;i<10;i++){
+	console.log(ctset["google.com"])
+	console.log(ctset["rutracker.org"])
+}
+console.timeEnd('checkset')
+

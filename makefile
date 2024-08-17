@@ -8,5 +8,5 @@ bloom.json: ct.json mkbloom.py
 ct.json:
 	bash fetchct.sh
 clean:
-	rm -f checkbloom.js proxy.pac ct.json
+	rm -f checkbloom.js proxy.pac ct.json bloom.json ctset.json
 .PHONY: clean
