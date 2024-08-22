@@ -1,16 +1,24 @@
-const proxydata = "SOCKS5 127.0.0.1:1080";
+const proxy_vps = "SOCKS5 127.0.0.1:1080";
+const proxy_gdpi = "SOCKS5 127.0.0.1:1085";
+
 const ctset = [
 #include "ctset.json"
 ][0];
 function FindProxyForURL(url,host){
 alert("Proxy for url:"+url);
-const PROXY = proxydata+"; DIRECT"; 
-var tld = host.split('.').slice(-1)[0]
-var hostpriv = host.split('.').slice(-2).join('.')
-var hostpriv3 = host.split('.').slice(-3).join('.')
-if(ctset[host]||ctset[hostpriv]||ctset[hostpriv3]){
-	alert("Blocked domain. Proxying through "+proxydata)
-	return PROXY;
+const PROXY = proxy_vps+"; DIRECT"; 
+const PROXYDPI = proxy_gdpi+"; DIRECT"; 
+var hst = host.split('.');
+if(shExpMatch(host,"*.googlevideo.com")||shExpMatch(host,"*.youtube.com")||shExpMatch(host,"youtube.com")){
+	alert("Slowed domain "+host+". Proxying through DPI-evading proxy "+proxy_gdpi);
+	return PROXYDPI;
+}
+for(var i=-hst.length;i<-1;i++){
+	var domain=hst.slice(i).join('.');
+	if(ctset[domain]){
+		alert("Blocked domain "+domain+". Proxying through "+proxy_vps)
+		return PROXY;
+	}
 }
 alert("Unblocked domain.");
 return "DIRECT";
