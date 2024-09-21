@@ -9,9 +9,18 @@ alert("Proxy for url:"+url);
 const PROXY = proxy_vps+"; DIRECT"; 
 const PROXYDPI = proxy_gdpi+"; DIRECT"; 
 var hst = host.split('.');
-if(shExpMatch(host,"*.googlevideo.com")||shExpMatch(host,"*.youtube.com")||shExpMatch(host,"youtube.com")){
-	alert("Slowed domain "+host+". Proxying through DPI-evading proxy "+proxy_gdpi);
-	return PROXYDPI;
+const ggslow = [
+    "*.googlevideo.com",
+    "*.youtube.com",
+    "youtube.com",
+    "*.ggpht.com",
+    "i.ytimg.com"
+];
+for(var i=0;i<ggslow.length;i++){
+    if(shExpMatch(host,ggslow[i])){
+        alert("Slowed domain "+host+". Proxying through DPI-evading proxy "+proxy_gdpi);
+        return PROXYDPI;
+    }
 }
 for(var i=-hst.length;i<-1;i++){
 	var domain=hst.slice(i).join('.');
