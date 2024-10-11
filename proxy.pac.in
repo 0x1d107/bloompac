@@ -16,7 +16,11 @@ const ggslow = [
     "*.ggpht.com",
     "i.ytimg.com",
 	"discord.com",
-	"discordapp.com"
+	"*.discord.com",
+	"discordapp.com",
+	"*.discordapp.com",
+	"*.discordapp.net",
+	"*.discord.gg"
 ];
 for(var i=0;i<ggslow.length;i++){
     if(shExpMatch(host,ggslow[i])){
